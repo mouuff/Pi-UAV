@@ -2,6 +2,7 @@
 
 import socket
 import struct
+import time
 
 S_TYPE = "BBB"
 
@@ -16,9 +17,14 @@ class Client:
 		self.sock.sendto(data, (self.ip, self.port))
 
 def main():
-	client = Client();
-	client.send(25, 50, 100)
-	client.send(100, 10, 44)
+	client = Client(ip="192.168.1.22");
+	x = 0
+	while (1):
+		client.send(x, 0, 0)
+		x += 1
+		if (x > 25):
+			x = 0
+		time.sleep(0.1)
 	
 
 if (__name__ == "__main__"):
