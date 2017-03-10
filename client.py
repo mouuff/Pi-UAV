@@ -17,10 +17,10 @@ class Client:
 		self.sock.sendto(data, (self.ip, self.port))
 
 def main():
-	client = Client(ip="192.168.1.22");
+	client = Client(ip="raspberrypi");
 	x = 0
 	while (1):
-		client.send(x, 0, 0)
+		client.send(x, x, x)
 		x += 1
 		if (x > 25):
 			x = 0

@@ -14,7 +14,7 @@ try:
 except pygame.error:
 	print 'no joystick found.'
 
-client = client.Client(ip="192.168.1.22");
+client = client.Client(ip="raspberrypi");
 
 while 1:
 	for e in pygame.event.get():
