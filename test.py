@@ -16,7 +16,7 @@ except pygame.error:
 
 client = client.Client();
 
-def joy2servo(val, minv = 70, maxv = 180):
+def joy2servo(val, minv = 1, maxv = 255):
 	val = int(((val + 1) / 2) * 255)
 	if (val > maxv):
 		val = maxv
@@ -28,7 +28,8 @@ while 1:
 	for e in pygame.event.get():
 		if e.type == pygame.locals.JOYAXISMOTION:
 			x , y, throttle = j.get_axis(0), j.get_axis(1), j.get_axis(2)
-			sx = joy2servo(x)
-			esc = joy2servo(throttle, 1, 255)
-			client.send(sx, 0, esc)
+			sr = joy2servo(x, 70, 185)
+			sl = joy2servo(x * (-1), 70, 185)
+			esc = joy2servo(throttle)
+			client.send(sr, sl, esc)
 			time.sleep(0.1)
