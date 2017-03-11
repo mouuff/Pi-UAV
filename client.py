@@ -7,7 +7,7 @@ import time
 S_TYPE = "BBB"
 
 class Client:
-	def __init__(self, ip="127.0.0.1", port=8080):
+	def __init__(self, ip="raspberrypi", port=8080):
 		self.ip = ip
 		self.port = port
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -17,7 +17,7 @@ class Client:
 		self.sock.sendto(data, (self.ip, self.port))
 
 def main():
-	client = Client(ip="raspberrypi");
+	client = Client();
 	x = 0
 	while (1):
 		client.send(x, x, x)

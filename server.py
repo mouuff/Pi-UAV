@@ -18,25 +18,33 @@ class Server:
                 res = struct.unpack("BBB", data)
                 return(res)
 
+class Servo:
+        FREQ = 100
+        MAX_WIDTH = 25
+        MIN_WIDTH = 3
+
+        def __init__(self, pin):
+                GPIO.setup(pin, GPIO.OUT)
+                self.pwm = GPIO.PWM(pin, self.FREQ)
+                self.pwm.start(0)
+
+        def rotate(self, val):
+                '''val between 0 and 255'''
+                pulse = val / (255 / self.MAX_WIDTH)
+                if (val > 0 and pulse < self.MIN_WIDTH):
+                        pulse = self.MIN_WIDTH
+                self.pwm.ChangeDutyCycle(pulse)
+
 def main():
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(18, GPIO.OUT)
-        GPIO.setup(17, GPIO.OUT)
-        GPIO.setup(27, GPIO.OUT)
-        pwm_a = GPIO.PWM(18, 100)
-        pwm_b = GPIO.PWM(17, 100)
-        pwm_c = GPIO.PWM(27, 100)
-        pwm_a.start(5)
-        pwm_b.start(5)
-        pwm_c.start(5)
+        servo_a = Servo(18)
+        #17 / 27
 
         server = Server()
         while (1):
                 data = server.recv()
-                pwm_a.ChangeDutyCycle(data[0])
-                pwm_b.ChangeDutyCycle(data[1])
-                pwm_c.ChangeDutyCycle(data[2])
-                print(data)
+                servo_a.rotate(data[0])
+                #print(data)
 
 if (__name__ == "__main__"):
         main()

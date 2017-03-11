@@ -14,20 +14,21 @@ try:
 except pygame.error:
 	print 'no joystick found.'
 
-client = client.Client(ip="raspberrypi");
+client = client.Client();
 
-def joy2servo(val):
+def joy2servo(val, minv = 70, maxv = 180):
 	val = int(((val + 1) / 2) * 255)
-	if (val == 0):
-		val += 1
+	if (val > maxv):
+		val = maxv
+	if (val < minv):
+		val = minv
 	return (val)
 
 while 1:
 	for e in pygame.event.get():
 		if e.type == pygame.locals.JOYAXISMOTION:
-			x , y = j.get_axis(0), j.get_axis(1)
-			print 'x and y : ' + str(x) +' , '+ str(y)
-			val = joy2servo(x)
-			client.send(val, 0, 0)
-			print(val)
+			x , y, throttle = j.get_axis(0), j.get_axis(1), j.get_axis(2)
+			sx = joy2servo(x)
+			esc = joy2servo(throttle, 1, 255)
+			client.send(sx, 0, esc)
 			time.sleep(0.1)
