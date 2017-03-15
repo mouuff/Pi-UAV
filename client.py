@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 import socket
 import struct
@@ -20,11 +20,11 @@ def main():
 	client = Client();
 	x = 0
 	while (1):
-		client.send(x, x, x)
-		x += 1
-		if (x > 25):
-			x = 0
+                data = raw_input(": ")
+                esc, s1, s2 = data.split(" ")
+                client.send(int(esc), int(s1), int(s2))
 		time.sleep(0.1)
+
 	
 
 if (__name__ == "__main__"):
