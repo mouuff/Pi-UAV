@@ -20,8 +20,8 @@ class Server:
 
 class Servo:
         FREQ = 100
-        MAX_WIDTH = 25
-        MIN_WIDTH = 3
+        MAX_WIDTH = 25.0
+        MIN_WIDTH = 1.0
 
         def __init__(self, pin):
                 GPIO.setup(pin, GPIO.OUT)
@@ -30,7 +30,7 @@ class Servo:
 
         def rotate(self, val):
                 '''val between 0 and 255'''
-                pulse = val / (255 / self.MAX_WIDTH)
+                pulse = float(val) / (255.0 / self.MAX_WIDTH)
                 if (val > 0 and pulse < self.MIN_WIDTH):
                         pulse = self.MIN_WIDTH
                 self.pwm.ChangeDutyCycle(pulse)
@@ -38,13 +38,17 @@ class Servo:
 def main():
         GPIO.setmode(GPIO.BCM)
         servo_a = Servo(18)
+        servo_b = Servo(17)
+        servo_c = Servo(27)
         #17 / 27
 
         server = Server()
         while (1):
                 data = server.recv()
                 servo_a.rotate(data[0])
-                #print(data)
+                servo_b.rotate(data[1])
+                servo_c.rotate(data[2])
+                print(data)
 
 if (__name__ == "__main__"):
         main()
