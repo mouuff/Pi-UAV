@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import pygame
-from pygame import locals
 from drone.protocol import Client
 
 def main():
