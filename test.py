@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
 import pygame
 from pygame import locals
-from protocol import Client
+from drone.protocol import Client
 
 def main():
     client = Client("127.0.0.1")

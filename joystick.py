@@ -1,6 +1,9 @@
+#!/usr/bin/env python
+
 import pygame
 from pygame import locals
-from protocol import Client
+from drone.protocol import Client
+from drone.misc import ratio
 import time
 
 pygame.init()
