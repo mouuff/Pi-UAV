@@ -2,21 +2,16 @@
 
 import RPi.GPIO as GPIO
 from drone.protocol import Server
-from drone.control import Servo
+from drone.control import Controler
 
 def main():
         GPIO.setmode(GPIO.BCM)
-        servo_a = Servo(18)
-        servo_b = Servo(17)
-        servo_c = Servo(27)
-        # 17 / 27
+        controler = Controler()
 
         server = Server()
         while (True):
                 data = server.recv()
-                servo_a.rotate(data[0])
-                servo_b.rotate(data[1])
-                servo_c.rotate(data[2])
+                controler.control(*data)
                 print(data)
 
 if (__name__ == "__main__"):
