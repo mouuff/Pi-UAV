@@ -12,7 +12,7 @@ def main():
         # 17 / 27
 
         server = Server()
-        while (1):
+        while (True):
                 data = server.recv()
                 servo_a.rotate(data[0])
                 servo_b.rotate(data[1])
