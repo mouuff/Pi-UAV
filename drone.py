@@ -3,18 +3,21 @@
 import RPi.GPIO as GPIO
 from drone.protocol import Server
 from drone.control import Controler
-
+import socket
 
 def main():
         GPIO.setmode(GPIO.BCM)
         controler = Controler(sr=26, sl=20, esc=21)
 
-        server = Server()
+        server = Server(timeout=1)
         while (True):
-                data = server.recv()
-                # socket.timeout
-                controler.control(*data)
-                print(data)
+		try:
+                	data = server.recv()
+			controler.control(*data)
+		except (socket.timeout):
+			controler.control(127, 127, 0)                
+		# socket.timeout
+                # print(data)
 
 if (__name__ == "__main__"):
         main()

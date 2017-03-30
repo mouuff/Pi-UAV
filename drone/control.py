@@ -25,7 +25,8 @@ class Servo:
 
 
 class Esc(Servo):
-    MAX_WIDTH = 12.0
+	MIN_WIDTH = 5.0
+	MAX_WIDTH = 10.0
 
 
 class Controler:
@@ -42,12 +43,18 @@ class Controler:
 
     def control(self, pitch, roll, throttle):
         self.esc.set(throttle)
-
+	STOP = self.STOP
         left = ratio(pitch, 0, 255, STOP, 255 - STOP)
         right = ratio(pitch, 255, 0, STOP, 255 - STOP)
 
         sleft = ratio(roll + left, 0, 255 * 2, 0, 255)
         sright = ratio(roll + right, 0, 255 * 2, 0, 255)
 
+	sleft *= 1.5
+	sright *= 1.5
+	if (sleft > 255):
+		sleft = 255
+	if (sright > 255):
+		sright = 255
         self.servo_right.set(sright)
         self.servo_left.set(sleft)
