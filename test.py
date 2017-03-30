@@ -2,6 +2,7 @@
 
 from drone.protocol import Client
 
+
 def main():
     client = Client("127.0.0.1")
     client.start()
