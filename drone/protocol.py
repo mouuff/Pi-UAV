@@ -18,7 +18,6 @@ class Server:
 
     def recv(self):
         data = self.sock.recv(struct.calcsize(S_TYPE))
-        print(data)
         res = struct.unpack("BBB", data)
         return (res)
 

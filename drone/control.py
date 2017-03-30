@@ -31,7 +31,11 @@ class Esc(Servo):
 class Controler:
     STOP = 50
 
-    def __init__(self, sr=26, sl=20, esc=21):
+    def __init__(self, sr, sl, esc):
+        '''sr: servo right
+        sl: servo left
+        esc: electronic speed controler
+        '''
         self.servo_right = Servo(sr)
         self.servo_left = Servo(sl)
         self.esc = Esc(esc)

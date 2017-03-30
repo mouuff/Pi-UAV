@@ -7,7 +7,7 @@ from drone.control import Controler
 
 def main():
         GPIO.setmode(GPIO.BCM)
-        controler = Controler()
+        controler = Controler(sr=26, sl=20, esc=21)
 
         server = Server()
         while (True):
