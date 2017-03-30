@@ -11,6 +11,7 @@ def main():
         server = Server()
         while (True):
                 data = server.recv()
+                # socket.timeout
                 controler.control(*data)
                 print(data)
 
