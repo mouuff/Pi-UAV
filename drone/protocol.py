@@ -7,11 +7,13 @@ import threading
 S_TYPE = "BBB"
 
 class Server:
-	def __init__(self, ip="", port=8080):
+	def __init__(self, ip="", port=8080, timeout=-1):
 		self.ip = ip
 		self.port = port
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.sock.bind((ip, port))
+		if (timeout > 0):
+			self.sock.settimeout(timeout)
 
 	def recv(self):
 		data = self.sock.recv(struct.calcsize(S_TYPE))
@@ -30,12 +32,15 @@ class Client:
 		self.lock = threading.Lock()
 		self.running = True
 
+	def send(self, data):
+		self.sock.sendto(data, (self.ip, self.port))
+
 	def send_loop(self):
 		while (self.running):
 			self.lock.acquire()
 			data = struct.pack(S_TYPE, *self.data)
 			self.lock.release()
-			self.sock.sendto(data, (self.ip, self.port))
+			self.send(data)
 			time.sleep(self.interval / 1000)
 			
 	def update(self, a, b, c):
