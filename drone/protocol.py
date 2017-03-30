@@ -17,6 +17,7 @@ class Server:
 
 	def recv(self):
 		data = self.sock.recv(struct.calcsize(S_TYPE))
+		print(data)
 		res = struct.unpack("BBB", data)
 		return (res)
 
@@ -32,18 +33,20 @@ class Client:
 		self.lock = threading.Lock()
 		self.running = True
 
-	def send(self, data):
-		self.sock.sendto(data, (self.ip, self.port))
+	def send(self, data_bytes):
+		self.sock.sendto(data_bytes, (self.ip, self.port))
 
 	def send_loop(self):
+		'''Send loop is used to regulary send data in a thread'''
 		while (self.running):
 			self.lock.acquire()
-			data = struct.pack(S_TYPE, *self.data)
+			data_bytes = struct.pack(S_TYPE, *self.data)
 			self.lock.release()
-			self.send(data)
-			time.sleep(self.interval / 1000)
+			self.send(data_bytes)
+			time.sleep(self.interval / 1000.0)
 			
 	def update(self, a, b, c):
+		'''Update data which is sent'''
 		self.lock.acquire()
 		self.data = (a, b, c)
 		self.lock.release()
