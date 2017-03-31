@@ -35,7 +35,9 @@ class Controler:
     STOP = 50
 
     def __init__(self, sr, sl, esc):
-        '''sr: servo right
+        '''
+        UAV controler
+        sr: servo right
         sl: servo left
         esc: electronic speed controler
         '''
