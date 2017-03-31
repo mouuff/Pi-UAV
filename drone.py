@@ -7,9 +7,7 @@ import socket
 
 
 def main():
-        GPIO.setmode(GPIO.BCM)
         controler = Controler(sr=26, sl=20, esc=21)
-
         server = Server(timeout=1)
         while (True):
             try:

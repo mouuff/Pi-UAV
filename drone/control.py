@@ -25,6 +25,8 @@ class Servo:
 
 
 class Esc(Servo):
+    '''Electronic speed controler
+    '''
     MIN_WIDTH = 5.0
     MAX_WIDTH = 10.0
 
@@ -37,6 +39,7 @@ class Controler:
         sl: servo left
         esc: electronic speed controler
         '''
+        GPIO.setmode(GPIO.BCM)
         self.servo_right = Servo(sr)
         self.servo_left = Servo(sl)
         self.esc = Esc(esc)
@@ -48,12 +51,12 @@ class Controler:
 
         sleft = ratio(roll + left, 0, 255 * 2, 0, 255)
         sright = ratio(roll + right, 0, 255 * 2, 0, 255)
-    # WIP for testing
-    sleft *= 1.5
-    sright *= 1.5
-    if (sleft > 255):
-        sleft = 255
-    if (sright > 255):
-        sright = 255
-    self.servo_right.set(sright)
-    self.servo_left.set(sleft)
+        # WIP for testing
+        sleft *= 1.5
+        sright *= 1.5
+        if (sleft > 255):
+            sleft = 255
+        if (sright > 255):
+            sright = 255
+        self.servo_right.set(sright)
+        self.servo_left.set(sleft)
