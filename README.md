@@ -1,9 +1,12 @@
 # UAV/drone project in python
 
-Specs:
-- 2100 mAh battery 10C 7.3v
+UAV Specs:
+- 7.4V 2700mAh 10C Lipo Battery
 - 2x SG90 servo
 - raspberry pi zero wireless
 - XXD 2212 1400KV Outrunner Brushless Motor + 30A ESC 1045 Propeller for QAV250
 
-I m using a gaming joystick to control the UAV for now
+Other:
+-  Insulated Spade Electrical Wire Cable Crimp Connectors Terminal Male/Female
+5 product ratings 
+- Gaming joystick to control the UAV for now
