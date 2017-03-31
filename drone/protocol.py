@@ -6,6 +6,7 @@ import threading
 
 S_TYPE = "BBB"
 
+
 class Server:
     def __init__(self, ip="", port=8080, timeout=-1):
         self.ip = ip
