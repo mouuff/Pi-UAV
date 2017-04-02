@@ -17,7 +17,7 @@ try:
 except pygame.error:
     print('no joystick found.')
 
-client = Client("raspberrypi", interval=250)
+client = Client("raspberrypi", interval=50)
 client.start()
 
 while 1:
@@ -29,4 +29,4 @@ while 1:
             pitch = ratio(x, -1, 1, 0, 255)
             roll = ratio(y, -1, 1, 0, 255)
             throttle = ratio(z, 1, -1, 0, 255)
-            client.update(roll, pitch, throttle)
+            client.update((roll, pitch, throttle))

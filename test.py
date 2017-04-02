@@ -11,7 +11,7 @@ def main():
     while (1):
         data = raw_input(": ")
         esc, s1, s2 = data.split(" ")
-        client.update(int(esc), int(s1), int(s2))
+        client.update((int(esc), int(s1), int(s2)))
 
 if (__name__ == "__main__"):
     main()
