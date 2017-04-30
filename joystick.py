@@ -2,7 +2,7 @@
 
 import pygame
 from pygame import locals
-from drone.protocol import Client
+from drone.protocol import ControlClient
 from drone.misc import ratio
 import time
 
@@ -17,7 +17,7 @@ try:
 except pygame.error:
     print('no joystick found.')
 
-client = Client("127.0.0.1", interval=50)
+client = ControlClient("127.0.0.1", interval=50)
 client.start()
 
 while 1:
