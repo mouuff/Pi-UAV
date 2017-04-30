@@ -29,21 +29,21 @@ class Servo:
 
 
 class Esc(Servo):
-    '''Electronic speed controler
+    '''Electronic speed controller
     '''
     MIN_WIDTH = 5.0
     MAX_WIDTH = 10.0
 
 
-class Controler:
+class Controller:
     STOP = 60
 
     def __init__(self, sr, sl, esc):
         '''
-        UAV controler
+        UAV controller
         sr: servo right
         sl: servo left
-        esc: electronic speed controler
+        esc: electronic speed controller
         '''
         GPIO.setmode(GPIO.BCM)
         self.servo_right = Servo(sr)

@@ -2,22 +2,22 @@
 
 import RPi.GPIO as GPIO
 from drone.protocol import Server
-from drone.control import Controler
+from drone.control import Controller
 import socket
 
 
 def main():
-    controler = Controler(sr=26, sl=20, esc=21)
+    controller = Controller(sr=26, sl=20, esc=21)
     server = Server(timeout=1)
     while (True):
         try:
             data = server.recv()
             try:
-                controler.control(*data)
+                controller.control(*data)
             except TypeError:
-                controler.default()
+                controller.default()
         except (socket.timeout):
-            controler.default()
+            controller.default()
     # socket.timeout
     # print(data)
 
