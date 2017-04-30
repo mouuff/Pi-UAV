@@ -9,9 +9,9 @@ def main():
 
     x = 0
     while (1):
-        data = raw_input(": ")
-        esc, s1, s2 = data.split(" ")
-        client.update((int(esc), int(s1), int(s2)))
+        string = raw_input(": ")
+        pitch, roll, throttle = map(int, string.split(" "))
+        client.update((pitch, roll, throttle))
 
 if (__name__ == "__main__"):
     main()
