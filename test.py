@@ -9,14 +9,9 @@ def main():
 
     x = 0
     while (1):
-        string = raw_input(": ")
-        throttle, roll, pitch = string.split(" ")
-        data = {
-            "pitch": pitch,
-            "roll": roll,
-            "throttle": throttle
-        }
-        client.update(data)
+        data = raw_input(": ")
+        esc, s1, s2 = data.split(" ")
+        client.update((int(esc), int(s1), int(s2)))
 
 if (__name__ == "__main__"):
     main()

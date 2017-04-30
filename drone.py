@@ -7,19 +7,16 @@ import socket
 
 
 def main():
-    controller = Controller(sr=26, sl=20, esc=21)
-    server = Server(timeout=1)
-    while (True):
-        try:
-            data = server.recv()
+        controller = Controller(sr=26, sl=20, esc=21)
+        server = Server(timeout=1)
+        while (True):
             try:
+                data = server.recv()
                 controller.control(*data)
-            except TypeError:
-                controller.default()
-        except (socket.timeout):
-            controller.default()
-    # socket.timeout
-    # print(data)
+            except (socket.timeout):
+                controller.control(127, 127, 0)
+        # socket.timeout
+        # print(data)
 
 if (__name__ == "__main__"):
         main()

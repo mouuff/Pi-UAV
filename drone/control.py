@@ -60,6 +60,6 @@ class Controller:
 
         self.servo_right.set(right)
         self.servo_left.set(left)
-
+    
     def default(self):
         self.control(127, 127, 0)

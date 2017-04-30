@@ -1,11 +1,10 @@
 
 import socket
-import pickle
+import struct
 import time
 import threading
 
-BUFF_SIZE = 4096
-
+S_TYPE = "BBB"
 
 class Server:
     def __init__(self, ip="", port=8080, timeout=None):
@@ -14,15 +13,15 @@ class Server:
         self.sock.settimeout(timeout)
 
     def recv(self):
-        data = self.sock.recv(BUFF_SIZE)
-        res = pickle.loads(data)
+        data = self.sock.recv(struct.calcsize(S_TYPE))
+        res = struct.unpack(S_TYPE, data)
         return res
 
 
 class Client:
     def __init__(self, ip, port=8080, interval=100):
         '''Class used to send data regulary in a thread'''
-        self.to_send = None
+        self.to_send = (0, 0, 0)
         self.ip = ip
         self.port = port
         self.interval = interval
@@ -39,7 +38,7 @@ class Client:
         '''Send loop is used to regulary send data in a thread'''
         while self.running:
             with self.lock:
-                data_bytes = pickle.dumps(self.to_send)
+                data_bytes = struct.pack(S_TYPE, *self.to_send)
             self.send(data_bytes)
             time.sleep(self.interval / 1000.0)
 

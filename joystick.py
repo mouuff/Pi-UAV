@@ -29,9 +29,4 @@ while 1:
             pitch = ratio(x, -1, 1, 0, 255)
             roll = ratio(y, -1, 1, 0, 255)
             throttle = ratio(z, 1, -1, 0, 255)
-            data = {
-                "pitch": pitch,
-                "roll": roll,
-                "throttle": throttle
-            }
-            client.update(data)
+            client.update((roll, pitch, throttle))
