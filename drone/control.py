@@ -52,8 +52,8 @@ class Controler:
 
     def control(self, pitch, roll, throttle):
         self.esc.set(throttle)
-        left = ratio(roll, 0, 255, self.STOP, 255 - self.STOP)
-        right = ratio(roll, 255, 0, self.STOP, 255 - self.STOP)
+        left = ratio(roll, 255, 0, self.STOP, 255 - self.STOP)
+        right = ratio(roll, 0, 255, self.STOP, 255 - self.STOP)
 
         left += pitch - (255.0 / 2.0)
         right += pitch - (255.0 / 2.0)
