@@ -37,7 +37,7 @@ class ControlServer(Server):
 
 
 class ControlClient(Client):
-    def __init__(self, ip, port=DEFAULT_PORT, interval=100):
+    def __init__(self, ip, port=DEFAULT_PORT, interval=50):
         '''Class used to send data regulary in a thread'''
         Client.__init__(self, ip, port)
         self.to_send = (0, 0, 0)
@@ -52,7 +52,7 @@ class ControlClient(Client):
         while self.running:
             with self.lock:
                 data_bytes = struct.pack(S_TYPE, *self.to_send)
-            self.send(data_bytes)
+            Client.send(self, data_bytes)
             time.sleep(self.interval / 1000.0)
 
     def update(self, to_send):
