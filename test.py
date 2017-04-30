@@ -4,7 +4,7 @@ from drone.protocol import ControlClient
 
 
 def main():
-    client = ControlClient("127.0.0.1")
+    client = ControlClient("raspberrypi")
     client.start()
 
     x = 0

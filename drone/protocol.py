@@ -5,6 +5,7 @@ import time
 import threading
 
 S_TYPE = "BBB"
+DEFAULT_PORT = 8080
 
 class Server:
     def __init__(self, ip, port, timeout=None):
@@ -15,9 +16,9 @@ class Server:
     def recv(self, size):
         return self.sock.recv(size)
 
+
 class Client:
     def __init__(self, ip, port):
-        '''Class used to send data regulary in a thread'''
         self.ip = ip
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -25,16 +26,18 @@ class Client:
     def send(self, data_bytes):
         self.sock.sendto(data_bytes, (self.ip, self.port))
 
+
 class ControlServer(Server):
-    def __init__(self, ip="", port=8080, timeout=None):
+    def __init__(self, ip="", port=DEFAULT_PORT, timeout=None):
         Server.__init__(self, ip, port, timeout)
     
     def recv(self):
         data = Server.recv(self, struct.calcsize(S_TYPE))
         return struct.unpack(S_TYPE, data)
 
+
 class ControlClient(Client):
-    def __init__(self, ip, port=8080, interval=100):
+    def __init__(self, ip, port=DEFAULT_PORT, interval=100):
         '''Class used to send data regulary in a thread'''
         Client.__init__(self, ip, port)
         self.to_send = (0, 0, 0)
@@ -64,6 +67,7 @@ class ControlClient(Client):
     def stop(self):
         # __del__ wouldn't be called with a thread running
         self.running = False
+
 
 def test():
     s = ControlServer()
