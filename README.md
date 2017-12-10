@@ -10,3 +10,6 @@ Other:
 -  Insulated Spade Electrical Wire Cable Crimp Connectors Terminal Male/Female
 5 product ratings 
 - Gaming joystick to control the UAV for now
+
+Here is a short video of the thing flying:
+https://youtu.be/gNDqZVzH9E4
